@@ -20,11 +20,12 @@ body {
   padding: 20px;
   box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 .score-section {
   display: flex;
+  flex-direction: column;
   align-items: center;
   font-size: 24px;
 }
@@ -46,21 +47,11 @@ body {
   margin-bottom: 12px;
 }
 
-.timer-text {
-  background: rgb(230, 153, 12);
-  padding: 15px;
-  margin-top: 20px;
-  margin-right: 20px;
-  border: 5px solid rgb(255, 189, 67);
-  border-radius: 15px;
-  text-align: center;
-}
-
 .answer-section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 button {
@@ -71,18 +62,10 @@ button {
   border-radius: 15px;
   display: flex;
   padding: 5px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border: 5px solid #234668;
   cursor: pointer;
-}
-
-.correct {
-  background-color: #2f922f;
-}
-
-.incorrect {
-  background-color: #ff3333;
 }
 
 button:hover {
@@ -91,8 +74,4 @@ button:hover {
 
 button:focus {
   outline: none;
-}
-
-button svg {
-  margin-right: 5px;
 }

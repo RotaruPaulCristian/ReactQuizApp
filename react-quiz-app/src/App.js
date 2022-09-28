@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function App() {
   const questions = [
     {
-      questionText: "WHAT YEAR DID LEAGUE OF LEGENDS DEBUT?",
+      questionText: "What year did League of Legends debut?",
       answerOptions: [
         { answerText: "2008", isCorrect: false },
         { answerText: "2009", isCorrect: true },
@@ -12,7 +12,7 @@ export default function App() {
       ],
     },
     {
-      questionText: "WHICH GAME DEVELOPER CREATED LOL?",
+      questionText: "Which game developer created LoL?",
       answerOptions: [
         { answerText: "Riot", isCorrect: true },
         { answerText: "Activision Blizzard", isCorrect: false },
@@ -21,7 +21,7 @@ export default function App() {
       ],
     },
     {
-      questionText: "WHAT DOES A “SKIN” REFER TO IN THE GAME?",
+      questionText: "What does a “SKIN” refer to in the game?",
       answerOptions: [
         { answerText: "A form of currency", isCorrect: false },
         { answerText: "A specific weapon for a champion", isCorrect: false },
@@ -36,7 +36,7 @@ export default function App() {
       ],
     },
     {
-      questionText: "WHICH OF THESE CHAMPIONS IS A MAGE?",
+      questionText: "Which of these champions is a MAGE?",
       answerOptions: [
         { answerText: "Sona", isCorrect: false },
         { answerText: "Miss Fortune", isCorrect: false },
@@ -46,25 +46,57 @@ export default function App() {
     },
   ];
 
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const [score, setScore] = useState(0);
+  // const [resetQuiz, setResetQuiz] = useState(false);
+
+  const handleAnswerButtonClick = (isCorrect) => {
+    if (isCorrect === true) {
+      setScore(score + 1);
+    }
+
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setShowScore(true);
+    }
+  };
+
   return (
     <div className="app">
-      {/* HINT: replace "false" with logic to display the 
-      score when the user has answered all the questions */}
-      {false ? (
+      <h1>League of Legends Quiz</h1>
+      {showScore ? (
         <div className="score-section">
-          You scored 1 out of {questions.length}
+          <p>
+            You scored {score} out of {questions.length}
+          </p>
+          <button onClick={() => window.location.reload(false)}>
+            Reset Quiz
+          </button>
         </div>
       ) : (
         <>
           <div className="question-section">
             <div className="question-count">
-              <span>Question 1</span>/{questions.length}
+              <span>Question {currentQuestion + 1}</span>/{questions.length}
             </div>
-            <div className="question-text">{questions[0].questionText}</div>
+            <div className="question-text">
+              {questions[currentQuestion].questionText}
+            </div>
           </div>
           <div className="answer-section">
-            {questions[0].answerOptions.map((answerOption) => {
-              return <button>{answerOption.answerText}</button>;
+            {questions[currentQuestion].answerOptions.map((answerOption) => {
+              return (
+                <button
+                  onClick={() =>
+                    handleAnswerButtonClick(answerOption.isCorrect)
+                  }
+                >
+                  {answerOption.answerText}
+                </button>
+              );
             })}
           </div>
         </>
